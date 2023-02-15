@@ -29,7 +29,7 @@ function App() {
 
 
   return (
-    <div className='bg-[url(https://preview.colorlib.com/theme/medico/img/banner_bg.png.webp)] bg-no-repeat'>
+    <div className='bg-[url(https://preview.colorlib.com/theme/medico/img/banner_bg.png.webp)]'>
       <Navbar 
         isTopOfPage={isTopOfPage}
       />
