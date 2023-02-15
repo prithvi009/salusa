@@ -1,4 +1,5 @@
 import Patient from "../models/Patient";
+import Doctor from "../models/Doctor";
 
 export const getPatient = async(req, res)=>{
     try{
@@ -12,6 +13,24 @@ export const getPatient = async(req, res)=>{
     }
 };
 
+
+// const updatePatientRecord = async(req, res)=>{
+//     try{
+//         const {id} = req.params;
+
+//         const doctorId = req.user.id;
+
+//         const user = await Patient.findById(id);
+//         const isAuthorized = await Doctor.findOne({_id: doctorId, patients: {$in: [id]}});
+//         if(!isAuthorized) res.status(401).json({msg: "unauthorised"});
+
+
+//     }
+//     catch(error){
+
+//     }
+
+// }
 
  
 
