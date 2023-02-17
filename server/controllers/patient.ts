@@ -1,7 +1,7 @@
 import Doctor from "../models/Doctor";
 import MedicalRecord from "../models/MedicalRecord";
 
-const getPatientMedicalRecords = async(req, res)=>{
+export const getPatientMedicalRecords = async(req, res)=>{
 
     try{
 
@@ -26,7 +26,7 @@ const getPatientMedicalRecords = async(req, res)=>{
 };
 
 
-const getPatientMedicalRecordsByDate = async(req, res)=>{
+export const getPatientMedicalRecordsByDate = async(req, res)=>{
     try{
         const patientId = req.params.patientId;
         const doctorId = req.user.id;
@@ -52,3 +52,5 @@ const getPatientMedicalRecordsByDate = async(req, res)=>{
 
     }
 }
+
+
