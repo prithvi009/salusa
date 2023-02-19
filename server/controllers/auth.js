@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import  Doctor  from "../models/Doctor";
-import Patient from "../models/Patient";
+import  Doctor  from "../models/Doctor.js";
+import Patient from "../models/Patient.js";
 
 
 export const registerPatient = async(req, res)=>{

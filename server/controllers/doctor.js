@@ -1,5 +1,17 @@
-import Patient from "../models/Patient";
-import Doctor from "../models/Doctor";
+import Patient from "../models/Patient.js";
+import Doctor from "../models/Doctor.js";
+
+
+export const addPatientRecord = async(req, res)=>{
+    try{
+
+        
+
+    }
+    catch(error){
+        res.status(404).json({message: error.message});
+    }
+}
 
 export const getPatient = async(req, res)=>{
     try{
