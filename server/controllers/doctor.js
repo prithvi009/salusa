@@ -1,10 +1,12 @@
 import Patient from "../models/Patient.js";
 import Doctor from "../models/Doctor.js";
+import MedicalRecord from "../models/MedicalRecord";
 
 
 export const addPatientRecord = async(req, res)=>{
     try{
-
+        const {id} = req.user;
+        
         
 
     }
