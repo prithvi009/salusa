@@ -1,5 +1,6 @@
 import Doctor from "../models/Doctor.js";
 import MedicalRecord from "../models/MedicalRecord.js";
+import Patient from "../models/Patient.js";
 
 export const getPatientMedicalRecords = async(req, res)=>{
 
@@ -30,10 +31,11 @@ export const getMyRecords = async(req, res)=>{
     try{
 
         const patientId = req.user.patientId;
-
-        const medicalRecords = await MedicalRecord.find({patientId : patientId}).sort({date: -1});
-
-        res.json(medicalRecords);
+        const patient = await Patient.find({patientId});
+        console.log(req);
+        const medicalRecords = await MedicalRecord.find({patientId: patient}).sort({date: -1});
+        
+        res.status(200).json(medicalRecords);
     }
     catch(error){
         console.error(error.message);
@@ -45,7 +47,7 @@ export const getMyRecords = async(req, res)=>{
 
 export const getMyRecordsByDate = async(req, res)=>{
     try{
-        const patientId = req.user._id;
+        const patientId = req.user.id;
         const date = req.params.date;
         
 

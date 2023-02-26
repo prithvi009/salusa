@@ -49,6 +49,7 @@ export const registerDoctor = async(req, res)=> {
 
     try{
         const{
+            doctorId,
             firstName,
             lastName, 
             email,
@@ -58,13 +59,15 @@ export const registerDoctor = async(req, res)=> {
             dateOfBirth,
             gender,
             medicalLicenseNumber,
+            backgroundCheck
         } = req.body;
 
 
         const salt = await bcrypt.genSalt();
         const passwordHash = await bcrypt.hash(password, salt);
         
-        const newDoctor = {
+        const newDoctor = new Doctor({
+            doctorId,
             firstName,
             lastName, 
             email,
@@ -74,8 +77,9 @@ export const registerDoctor = async(req, res)=> {
             dateOfBirth,
             gender,
             medicalLicenseNumber,
+            backgroundCheck,
 
-        }
+        })
 
         const savedDoctor = await newDoctor.save();
         res.status(201).json(savedDoctor);
@@ -118,13 +122,13 @@ export async function loginPatient(req, res){
 export const loginDoctor = async(req, res)=>{
     try{
         const {email, password} = req.body;
-        const user = await Doctor.findOne(email);
+        const user = await Doctor.findOne({email: email});
         if(!user) res.status(400).json("Doctor does not exist");
 
         const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch) res.status(400).json("invalid credentials");
 
-        const token = jwt.sign({id: user._id},  process.env.JWT_SECRET);
+        const token = jwt.sign({id: user.doctorId},  'adkfhdsio128983nfdsjkf');
         delete user.password;
         res.status(200).json({ token, user });
     }

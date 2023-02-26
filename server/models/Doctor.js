@@ -2,6 +2,11 @@ import mongoose from 'mongoose';
 
 
 const DoctorSchema = new mongoose.Schema({
+    doctorId:{
+        type: Number,
+        require: true,
+        unique: true,
+    },
     firstName:{
         type: String,
         require: true,

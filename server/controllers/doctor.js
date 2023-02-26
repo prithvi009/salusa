@@ -15,10 +15,13 @@ export const addPatientRecord = async(req, res)=>{
             medications,
             procedures
         } = req.body;
-
+        console.log(req);
+        const patient = await Patient.findOne({patientId: patientId});
+        const doctorId = req.user.id;
+        const doctor = await Doctor.findOne({doctorId});
         const medicalRecord = new MedicalRecord({
-            patientId : patientId,
-            doctorId: req.user._id, // Assumes the currently authenticated user is a doctor
+            patientId : patient._id,
+            doctorId: doctor._id, // Assumes the currently authenticated user is a doctor
             symptoms: symptoms,
             diagnosis: diagnosis,
             medications: medications,
@@ -28,8 +31,8 @@ export const addPatientRecord = async(req, res)=>{
             procedures: procedures
         });
 
-        await medicalRecord.save();
-        const medical = await medicalRecord.find();
+        
+        const medical = await medicalRecord.save();
         res.send(medical);
         
 
@@ -53,7 +56,6 @@ export const getPatient = async(req, res)=>{
 
 // const updatePatientRecord = async(req, res)=>{
 //     try{
-//         const {id,} = req.params.body;
 
 //         const doctorId = req.user.id;
 

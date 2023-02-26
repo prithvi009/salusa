@@ -13,6 +13,7 @@ import { fileURLToPath } from "url";
 import { registerDoctor, registerPatient } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
 import patientRoutes from "./routes/patientData.js"
+import doctorRoutes from "./routes/doctor.js";
 
 
 
@@ -51,6 +52,7 @@ app.post("/auth/register-doctor", upload.single("picture"), registerDoctor);
 
 app.use("/auth", authRoutes);
 app.use("/patient", patientRoutes);
+app.use("/doctor", doctorRoutes);
 
 const MONGO_URL = 'mongodb+srv://prithvi:prithvi009@cluster0.ygcrjfj.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 8080;

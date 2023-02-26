@@ -5,6 +5,6 @@ import { verifyToken } from "../middleware/auth.js";
 
 const patientRoutes = express.Router();
 
-patientRoutes.get("/:patientId/medicalRecords", verifyToken, getMyRecords);
+patientRoutes.get("/:_id/medicalRecords", verifyToken, getMyRecords);
 
 export default patientRoutes;
