@@ -1,14 +1,14 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import  Doctor  from "../models/Doctor.js";
-import Patient from "../models/Patient.js";
-
+import Patient from "../models/Patient.js"
 
 export const registerPatient = async(req, res)=>{
 
     try{
 
         const{
+            patientId,
             firstName,
             lastName, 
             email,
@@ -24,6 +24,7 @@ export const registerPatient = async(req, res)=>{
         const passwordHash = await bcrypt.hash(password, salt);
 
         const newPatient = new Patient({
+            patientId,
             firstName,
             lastName,
             email,
@@ -88,18 +89,21 @@ export const registerDoctor = async(req, res)=> {
 
 };
 
-export const loginPatient = async(req, res)=>{
+
+export async function loginPatient(req, res){
     try{
 
         const {email, password} = req.body;
         const user = await Patient.findOne({email: email});
+        console.log(req.body);
         if(!user)  res.status(400).json({ msg: "User does not exist. " });
         
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
 
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ patientId: user.patientId }, 'adkfhdsio128983nfdsjkf');
+        console.log(token);
         delete user.password;
         res.status(200).json({ token, user });
 

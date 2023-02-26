@@ -35,7 +35,7 @@ export const doctor=[
 
 
 export const patient=[
-    {       
+    {   patientId: 999,
         firstName: "pr",
         lastName: "awa",
         email: "awatadeprithviraj09@gmail.com",

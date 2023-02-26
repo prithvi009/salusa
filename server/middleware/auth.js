@@ -21,7 +21,7 @@ export const verifyToken =async (req, res, next) => {
     }
     catch(error){
 
-        req.status(500).json({error: error.message});
+        res.status(500).json({error: error.message});
 
     }
     

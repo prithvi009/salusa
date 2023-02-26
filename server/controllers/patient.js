@@ -1,5 +1,5 @@
-import Doctor from "../models/Doctor";
-import MedicalRecord from "../models/MedicalRecord";
+import Doctor from "../models/Doctor.js";
+import MedicalRecord from "../models/MedicalRecord.js";
 
 export const getPatientMedicalRecords = async(req, res)=>{
 
@@ -25,6 +25,45 @@ export const getPatientMedicalRecords = async(req, res)=>{
 
 };
 
+export const getMyRecords = async(req, res)=>{
+
+    try{
+
+        const patientId = req.user.patientId;
+
+        const medicalRecords = await MedicalRecord.find({patientId : patientId}).sort({date: -1});
+
+        res.json(medicalRecords);
+    }
+    catch(error){
+        console.error(error.message);
+        res.status(500).send("Server Error");
+
+    }
+
+};
+
+export const getMyRecordsByDate = async(req, res)=>{
+    try{
+        const patientId = req.user._id;
+        const date = req.params.date;
+        
+
+        
+        const medicalRecords = await MedicalRecord.find({
+            patient: patientId,
+            date: { $gte: new Date(date), $lt: new Date(date + "T23:59:59.999Z") }
+          })
+            .sort({ date: -1 });
+      
+          res.json(medicalRecords);
+    }
+    catch(err){
+        console.error(err.message);
+        res.status(500).send("Server Error");
+
+    }
+}
 
 export const getPatientMedicalRecordsByDate = async(req, res)=>{
     try{
@@ -37,6 +76,8 @@ export const getPatientMedicalRecordsByDate = async(req, res)=>{
             _id: doctorId,
             patients: {$in: [patientId]}
         });
+
+        if(!isAuthorized) res.status(401).json({msg: "unauthorised"});
         const medicalRecords = await MedicalRecord.find({
             patient: patientId,
             date: { $gte: new Date(date), $lt: new Date(date + "T23:59:59.999Z") }

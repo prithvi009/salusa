@@ -12,8 +12,8 @@ import { fileURLToPath } from "url";
 
 import { registerDoctor, registerPatient } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
-// import { addPatientRecord } from "./controllers/doctor.js";
-// import getPatient  from "./controllers/doctor.js";
+import patientRoutes from "./routes/patientData.js"
+
 
 
 
@@ -48,8 +48,9 @@ app.post("/auth/register-doctor", upload.single("picture"), registerDoctor);
 
 // app.post("/auth/add-record", addPatientRecord);
 
-// app.get('/prithvi', getPatient);
-app.use("/auth", authRoutes); 
+
+app.use("/auth", authRoutes);
+app.use("/patient", patientRoutes);
 
 const MONGO_URL = 'mongodb+srv://prithvi:prithvi009@cluster0.ygcrjfj.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 8080;

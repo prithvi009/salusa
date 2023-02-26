@@ -1,9 +1,10 @@
 import express from "express";
-import { getPatientMedicalRecords, getPatientMedicalRecordsByDate } from "../controllers/patient.js";
+import { getMyRecords, getPatientMedicalRecords } from "../controllers/patient.js";
+
 import { verifyToken } from "../middleware/auth.js";
 
-const router = express.Router();
+const patientRoutes = express.Router();
 
-router.get("/:patientId/medicalRecords",verifyToken, getPatientMedicalRecords);
+patientRoutes.get("/:patientId/medicalRecords", verifyToken, getMyRecords);
 
-export default router;
+export default patientRoutes;
