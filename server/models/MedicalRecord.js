@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const MedicalRecordSchema = new mongoose.Schema({
-    patient: {
+    patientId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Patient",
         required: true
     },
-    doctor: {
+    doctorId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Doctor",
         required: true
@@ -42,7 +42,28 @@ const MedicalRecordSchema = new mongoose.Schema({
     notes: {
         type: String,
         default: ""
-    }
+    },
+    vitals: {
+      height: Number,
+      weight: Number,
+      temperature: Number,
+      bloodPressure: {
+        systolic: Number,
+        diastolic: Number
+      },
+      pulse: Number,
+      respiratoryRate: Number
+    },
+    labResults: [{
+      test: String,
+      result: String,
+      date: Date
+    }],
+    procedures: [{
+      name: String,
+      date: Date,
+      notes: String
+    }]
 });
 
 const MedicalRecord = mongoose.model("MedicalRecord", MedicalRecordSchema);

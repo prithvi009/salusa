@@ -35,9 +35,6 @@ const Navbar = ({isTopOfPage}) => {
                         </button>
 
                 )}
-
-
-
             </div>
 
 

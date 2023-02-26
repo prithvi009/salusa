@@ -26,3 +26,11 @@ export const verifyToken =async (req, res, next) => {
     }
     
 };   
+
+
+export const requireDoctorAuth = (req, res, next)=> {
+    if (!req.isAuthenticated() || req.user.role !== 'doctor') {
+      return res.status(401).send('Unauthorized');
+    }
+    next();
+}

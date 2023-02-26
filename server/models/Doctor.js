@@ -52,7 +52,13 @@ const DoctorSchema = new mongoose.Schema({
     backgroundCheck: {
         type: Boolean,
         default: false
-    }
+    },
+    medicalRecords: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "MedicalRecord"
+        }
+    ]
 })
 
 const Doctor = mongoose.model("Doctor", DoctorSchema)
