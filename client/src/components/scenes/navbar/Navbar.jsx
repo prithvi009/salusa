@@ -16,10 +16,10 @@ const Navbar = ({isTopOfPage}) => {
     <nav>
         <div className={`${navbarbackground} ${flexBetween} fixed top-0 w-full py-6`}>
             <div className={`${flexBetween} mx-auto w-5/6`}>
-                <h3>MediLodge</h3>
+                <h3 className='text-xl font-bold'><span className=" text-2xl font-extrabold">S</span>alus</h3>
                 {isAboveMediumScreens ? (
                     <ul className={`${flexBetween} space-x-14 text-lg`}>
-                        <li>About</li>
+                        <li className='cursor-pointer'>About</li>
                         <li>Contact</li>
                         <li>
                             <ActionButton />
