@@ -99,7 +99,7 @@ export async function loginPatient(req, res){
 
         const {email, password} = req.body;
         const user = await Patient.findOne({email: email});
-        console.log(req.body);
+
         if(!user)  res.status(400).json({ msg: "User does not exist. " });
         
         const isMatch = await bcrypt.compare(password, user.password);
