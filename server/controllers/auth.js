@@ -100,7 +100,7 @@ export async function loginPatient(req, res){
         const {email, password} = req.body;
         const user = await Patient.findOne({email: email});
 
-        if(!user)  res.status(400).json({ msg: "User does not exist. " });
+        if(!user) return res.status(400).json({ msg: "User does not exist. " });
         
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
@@ -123,10 +123,10 @@ export const loginDoctor = async(req, res)=>{
     try{
         const {email, password} = req.body;
         const user = await Doctor.findOne({email: email});
-        if(!user) res.status(400).json("Doctor does not exist");
+        if(!user) return res.status(400).json("Doctor does not exist");
 
         const isMatch = await bcrypt.compare(password, user.password);
-        if(!isMatch) res.status(400).json("invalid credentials");
+        if(!isMatch) return res.status(400).json("invalid credentials");
 
         const token = jwt.sign({id: user.doctorId},  'adkfhdsio128983nfdsjkf');
         delete user.password;
