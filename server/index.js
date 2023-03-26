@@ -43,16 +43,16 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 //routes with file
-app.post("/auth/register-patient", upload.single("picture"), registerPatient);
-app.post("/auth/register-doctor", upload.single("picture"), registerDoctor);
+app.post("api/v1/register-patient", upload.single("picture"), registerPatient);
+app.post("api/v1/register-doctor", upload.single("picture"), registerDoctor);
 
 
 // app.post("/auth/add-record", addPatientRecord);
 
 
-app.use("/auth", authRoutes);
-app.use("/patient", patientRoutes);
-app.use("/doctor", doctorRoutes);
+app.use("api/v1/auth", authRoutes);
+app.use("api/v1/patient", patientRoutes);
+app.use("api/v1/doctor", doctorRoutes);
 
 const MONGO_URL = 'mongodb+srv://prithvi:prithvi009@cluster0.ygcrjfj.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 8080;
